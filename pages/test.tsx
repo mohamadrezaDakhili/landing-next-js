@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles, useTheme } from "@mui/styles";
+import { useEffect, useState } from "react";
 import {
   Box,
-  Button,
   Container,
   Grid,
-  IconButton,
   Theme,
   Typography,
-  useMediaQuery,
-} from "@mui/material";
+  IconButton,
+  Avatar,
+} from "@material-ui/core";
 import heroImage from "../public/static/hero.jpg";
 import Image from "next/image";
 import { CustomButton } from "../components/kit/Button";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import youtubeIcon from "../public/static/images/youtube.png";
 import tiktokIcon from "../public/static/images/tiktok.png";
 import FacebookWhiteSvg from "../public/static/images/facebookwhite.svg";
@@ -30,6 +27,12 @@ import VectorSvg from "../public/static/images/Vector.svg";
 import HelpSvg from "../public/static/images/Help.svg";
 import imageBaner from "../public/static/images/Image-banner.png";
 import Footer from "../components/footer";
+import { axiosInstance } from "../api/services";
+import {
+  ILandingListingRecentlySoldListDOC,
+  ILandingListingRecentlySoldListResDto,
+} from "../types/DTO/listing";
+import {makeStyles} from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) => ({
   hero: {
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "calc(100vh - 96px)",
     minHeight: "740px",
     marginTop: "6rem",
-    background:'#F7F7FC'
+    background: "#F7F7FC",
   },
   boxBannerOne: {
     display: "flex",
@@ -237,11 +240,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: "16px",
   },
 }));
-const Test = () => {
+
+const Test = (props: { data: any }) => {
   const classes = useStyles();
-  const theme = useTheme<Theme>();
   const isMobile = false;
   const [isLoading, setisLoading] = useState(false);
+
+  useEffect(() => {
+    console.log(props.data, "props");
+  }, [props]);
 
   return (
     <>
@@ -298,6 +305,7 @@ const Test = () => {
               <Typography className={classes.heroContentSebudaWhiteText}>
                 ssets
               </Typography>
+              
             </Box>
             <Box style={{ margin: "2.875rem 0" }}>
               <Typography className={classes.heroContentDescription}>
@@ -379,13 +387,13 @@ const Test = () => {
                 >
                   <Box>
                     <IconButton size={"small"}>
-                      <LinkedInIcon
+                      {/* <LinkedInIcon
                         style={{
                           color: "#EFF0F7",
                           width: "40px",
                           height: "40px",
                         }}
-                      />
+                      /> */}
                     </IconButton>
                   </Box>
                 </Box>
@@ -1002,6 +1010,16 @@ const Test = () => {
       <Footer handleSubmitChatAdmin={() => {}} />
     </>
   );
+};
+
+Test.getInitialProps = async (ctx: any) => {
+  const { data } = await axiosInstance.get<any>(
+    "/api/landing/listing/sold",
+    {}
+  );
+  return {
+    data: data || {},
+  };
 };
 
 export default Test;

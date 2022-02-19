@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from "@material-ui/core";
 import Image from "next/image";
 import LandingListingSvg from "../../public/static/images/landing-listing.svg";
 const EmptyState = () => {

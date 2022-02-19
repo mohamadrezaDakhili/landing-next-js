@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles, useTheme } from "@mui/styles";
 import {
   Box,
-  Button,
   Container,
-  Grid,
-  IconButton,
   Theme,
   Typography,
-  useMediaQuery,
-} from "@mui/material";
+} from "@material-ui/core";
 import tiktokIcon from "../../public/static/images/tiktok.png";
 import bannerImage from "../../public/static/Banner-image.jpg";
 import {
@@ -20,9 +15,10 @@ import {
   Telegram,
   YouTube,
   LinkedIn,
-} from "@mui/icons-material";
+} from "@material-ui/icons";
 import Link from "next/link";
 import Image from "next/image";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   boxBannerOne: {

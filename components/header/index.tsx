@@ -1,4 +1,3 @@
-import { makeStyles, useTheme } from "@mui/styles";
 import Image from "next/image";
 import {
   AppBar,
@@ -18,12 +17,13 @@ import {
   Tooltip,
   Typography,
   useMediaQuery,
-} from "@mui/material";
+} from "@material-ui/core";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import logSvg from "../../public/static/images/logo.svg";
 import sebudaLogoSvg from "../../public/static/images/sebudaLogo.svg";
 import { CustomButton } from "../kit/Button";
+import { makeStyles, useTheme } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -272,91 +272,89 @@ const Header = () => {
         <ClickAwayListener
           //@ts-ignore
           onClickAway={handleClose}
-          children={
-            <Popper
-              style={{ zIndex: 1 }}
-              open={open}
-              anchorEl={anchorRef.current}
-              role={undefined}
-              transition
-              disablePortal
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin:
-                      placement === "bottom" ? "center top" : "center bottom",
-                  }}
-                >
-                  <Box component={Paper} style={{ borderRadius: "8px" }}>
-                    <MenuList
-                      autoFocusItem={open}
-                      id="menu-list-grow"
-                      onKeyDown={handleListKeyDown}
-                    >
-                      {isXs && (
-
-                        <>
-                          {isAuthenticated && (
-                            <MenuItem
-                              onClick={(e) => {
-                                handleClose(e);
-                              }}
-                            >
-                              <Link href="/">My List</Link>
-                            </MenuItem>
-                          )}
-                        </>
-                      )}
-                      {isAuthenticated ? (
-                        <MenuItem
-                          onClick={(e) => {
-                            handleClose(e);
-                            // history.push(paths.profile);
-                          }}
-                        >
-                          Profile
-                        </MenuItem>
-                      ) : (
-                        <>
+        >
+          <Popper
+            style={{ zIndex: 1 }}
+            open={open}
+            anchorEl={anchorRef.current}
+            role={undefined}
+            transition
+            disablePortal
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                    placement === "bottom" ? "center top" : "center bottom",
+                }}
+              >
+                <Box component={Paper} style={{ borderRadius: "8px" }}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="menu-list-grow"
+                    onKeyDown={handleListKeyDown}
+                  >
+                    {isXs && (
+                      <>
+                        {isAuthenticated && (
                           <MenuItem
                             onClick={(e) => {
                               handleClose(e);
-                              // history.push(paths.signin);
                             }}
                           >
-                            Login
+                            <Link href="/">My List</Link>
                           </MenuItem>
-                          <MenuItem
-                            onClick={(e) => {
-                              handleClose(e);
-                              // history.push(paths.signup);
-                            }}
-                          >
-                            Sign Up
-                          </MenuItem>
-                        </>
-                      )}
-
-                      {isAuthenticated && (
+                        )}
+                      </>
+                    )}
+                    {isAuthenticated ? (
+                      <MenuItem
+                        onClick={(e) => {
+                          handleClose(e);
+                          // history.push(paths.profile);
+                        }}
+                      >
+                        Profile
+                      </MenuItem>
+                    ) : (
+                      <>
                         <MenuItem
                           onClick={(e) => {
                             handleClose(e);
-                            localStorage.clear();
-                            window.location.reload();
+                            // history.push(paths.signin);
                           }}
                         >
-                          Log out
+                          Login
                         </MenuItem>
-                      )}
-                    </MenuList>
-                  </Box>
-                </Grow>
-              )}
-            </Popper>
-          }
-        ></ClickAwayListener>
+                        <MenuItem
+                          onClick={(e) => {
+                            handleClose(e);
+                            // history.push(paths.signup);
+                          }}
+                        >
+                          Sign Up
+                        </MenuItem>
+                      </>
+                    )}
+
+                    {isAuthenticated && (
+                      <MenuItem
+                        onClick={(e) => {
+                          handleClose(e);
+                          localStorage.clear();
+                          window.location.reload();
+                        }}
+                      >
+                        Log out
+                      </MenuItem>
+                    )}
+                  </MenuList>
+                </Box>
+              </Grow>
+            )}
+          </Popper>
+        </ClickAwayListener>
       </Toolbar>
     </AppBar>
   );

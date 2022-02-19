@@ -1,11 +1,15 @@
-import { ThemeOptions } from "@mui/material/styles";
+import { createTheme } from "@material-ui/core/styles";
+import { ThemeOptions } from "@material-ui/core/styles";
+const themeOptions: ThemeOptions = {};
 
-const lightThemeOptions: ThemeOptions = {
+export { themeOptions };
+
+let theme = createTheme({
   palette: {
     primary: {
       light: "#EEE5FE",
-      main: "#fcd535", 
-      dark: "#bf9d0f", 
+      main: "#fcd535", //
+      dark: "#bf9d0f", //
       contrastText: "#000",
     },
     secondary: {
@@ -53,6 +57,7 @@ const lightThemeOptions: ThemeOptions = {
       primary: "#262338",
       secondary: "#4E4B66",
       disabled: "#A0A3BD",
+      hint: "#6E7191",
     },
     divider: "#D9DBE9",
     background: {
@@ -128,208 +133,133 @@ const lightThemeOptions: ThemeOptions = {
   shape: {
     borderRadius: 16,
   },
-  components: {
+  props: {
+    MuiButton: {
+      disableElevation: true,
+    },
+  },
+  overrides: {
     MuiCssBaseline: {
-      styleOverrides: {
-        "@global": {
-          html:
-            process.env.NODE_ENV === "production"
-              ? {
-                  ["@media (min-width:1281px)"]: {
-                    fontSize: "12px",
-                  },
-                  ["@media (min-width:1441px)"]: {
-                    fontSize: "14px",
-                  },
-                  ["@media (max-width:1280px)"]: {
-                    fontSize: "12px",
-                  },
-                  ["@media (max-width:960px)"]: {
-                    fontSize: "14px",
-                  },
-                }
-              : {},
-        },
+      "@global": {
+        html:
+          process.env.NODE_ENV === "production"
+            ? {
+                ["@media (min-width:1281px)"]: {
+                  fontSize: "12px",
+                },
+                ["@media (min-width:1441px)"]: {
+                  fontSize: "14px",
+                },
+                ["@media (max-width:1280px)"]: {
+                  fontSize: "12px",
+                },
+                ["@media (max-width:960px)"]: {
+                  fontSize: "14px",
+                },
+              }
+            : {},
       },
     },
     MuiTooltip: {
-      styleOverrides: {
-        tooltip: {
-          borderRadius: 4,
-        },
+      tooltip: {
+        borderRadius: 4,
       },
     },
     MuiBreadcrumbs: {
-      styleOverrides: {
-        li: {
-          color: "#6E7191",
-        },
+      li: {
+        color: "#6E7191",
       },
     },
     MuiFormControlLabel: {
-      styleOverrides: {
-        label: {
-          userSelect: "none",
-        },
+      label: {
+        userSelect: "none",
       },
     },
     MuiRadio: {
-      styleOverrides: {
-        root: {
-          padding: 4,
-        },
+      root: {
+        padding: 4,
       },
     },
     MuiButton: {
-      styleOverrides: {
-        root: {
-          paddingTop: 12,
-          paddingBottom: 12,
-          textTransform: "capitalize",
+      root: {
+        paddingTop: 12,
+        paddingBottom: 12,
+        textTransform: "capitalize",
+      },
+      outlined: {
+        paddingTop: 11,
+        paddingBottom: 11,
+        "&.MuiButton-outlinedPrimary": {
+          borderWidth: 2,
         },
-        outlined: {
-          paddingTop: 11,
-          paddingBottom: 11,
-          "&.MuiButton-outlinedPrimary": {
-            borderWidth: 2,
-          },
-          "&.MuiButton-outlinedPrimary:hover": {
-            borderWidth: 2,
-          },
-          "&.MuiButton-outlinedSecondary": {
-            borderWidth: 2,
-          },
-          '&.MuiButton-outlinedSecondary:h"(min-width:600px)"over': {
-            borderWidth: 2,
-          },
+        "&.MuiButton-outlinedPrimary:hover": {
+          borderWidth: 2,
         },
-        text: {
-          paddingTop: 11,
-          paddingBottom: 11,
+        "&.MuiButton-outlinedSecondary": {
+          borderWidth: 2,
         },
-        sizeSmall: {
-          paddingTop: 2,
-          paddingBottom: 4,
+        "&.MuiButton-outlinedSecondary:hover": {
+          borderWidth: 2,
         },
-        sizeLarge: {
-          paddingTop: 18,
-          paddingBottom: 18,
-        },
+      },
+      text: {
+        paddingTop: 11,
+        paddingBottom: 11,
+      },
+      sizeSmall: {
+        paddingTop: 2,
+        paddingBottom: 4,
+      },
+      sizeLarge: {
+        paddingTop: 18,
+        paddingBottom: 18,
       },
     },
     MuiFilledInput: {
-      styleOverrides: {
-        // inputMarginDense: {
-        //   paddingTop: 14,
-        //   paddingBottom: 4,
-        // },
-        input: {
-          paddingTop: 24,
-          paddingBottom: 7,
-        },
+      inputMarginDense: {
+        paddingTop: 14,
+        paddingBottom: 4,
+      },
+      input: {
+        paddingTop: 24,
+        paddingBottom: 7,
       },
     },
     MuiLink: {
-      styleOverrides: {
-        root: {
-          "&:hover": {
-            color: "#a37f00",
-          },
+      root: {
+        "&:hover": {
+          color: "#a37f00",
         },
       },
     },
     MuiFormHelperText: {
-      styleOverrides: {
-        root: {
-          position: "absolute",
-          bottom: 0,
-          transform: "translate(0,100%)",
-        },
+      root: {
+        position: "absolute",
+        bottom: 0,
+        transform: "translate(0,100%)",
       },
     },
-    MuiPagination: {
-      styleOverrides: {
-        root: {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        },
-
-        ul: {
-          "& li .MuiPaginationItem-root": {
-            // :not(.MuiPaginationItem-root:last-child)
-            ":last-child": {
-              border: "none",
-            },
-            ":first-child": {
-              border: "none",
-            },
-          },
-        },
-      },
-    },
-
-    // MuiPickersToolbarText-toolbarTxt
-    // MuiPickersCalendarHeader: {
-    //   iconButton: {},
-    //   toolbarTxt: {
-    //     color: "#0CBF95",
-    //   },
-    // },
-    // MuiPickersToolbar: {},
-    // MuiPickersDatePickerRoot: {
-    //   toolbar: {
-    //     "& *": {
-    //       color: "#fff",
-    //     },
-    //     "& h4": {
-    //       fontSize: 26,
-    //     },
-    //     "& h6": {
-    //       fontSize: 30,
-    //     },
-    //   },
-    // },
     MuiAccordion: {
-      styleOverrides: {
-        root: {
-          background: "transparent",
-          boxShadow: "none",
-          "&:before": {
-            height: 0,
-          },
+      root: {
+        background: "transparent",
+        boxShadow: "none",
+        "&:before": {
+          height: 0,
         },
       },
     },
     MuiAccordionSummary: {
-      styleOverrides: {
-        root: {
-          flexDirection: "row-reverse",
-        },
+      root: {
+        flexDirection: "row-reverse",
       },
     },
     MuiContainer: {
-      styleOverrides: {
-        maxWidthLg: {
-          position: "relative",
-          maxWidth: 1440,
-        },
-      },
-    },
-    MuiBadge: {
-      styleOverrides: {
-        badge: {
-          top: 0,
-          padding: "0 4px",
-          paddingTop: "2px",
-          height: 12,
-          fontWeight: 600,
-          fontSize: 8,
-          lineHeight: 8,
-        },
+      maxWidthLg: {
+        position: "relative",
+        maxWidth: 1440,
       },
     },
   },
-};
+});
 
-export default lightThemeOptions;
+export default theme;
